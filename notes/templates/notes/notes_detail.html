@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h1 class="card-title">{{ note.title }}</h1>
+          <p class="card-text" style="white-space: pre-line;">{{ note.text }}</p>
+          {% if note.file %}
+          <hr>
+          <a href="{{ note.file.url }}" class="btn btn-outline-primary" target="_blank">
+            <i class="bi bi-file-earmark-text"></i>
+            View Document
+          </a>
+          {% endif %}
+          <hr>
+          <div class="d-flex justify-content-end">
+            <a href="{% url 'notes.update' pk=note.id %}" class="btn btn-outline-secondary me-2">
+              <i class="bi bi-pencil-square"></i>
+              Edit
+            </a>
+            <form action="{% url 'notes.delete' pk=note.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger">
+                <i class="bi bi-trash"></i>
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4">
+        <a href="{% url 'notes.list' %}" class="btn btn-outline-secondary">
+          <i class="bi bi-arrow-left"></i>
+          Back to Vault
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
