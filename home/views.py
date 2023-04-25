@@ -6,7 +6,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView,LogoutView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
-
 from django.shortcuts import redirect
 
 # Create your views here.
@@ -35,10 +34,3 @@ class HomeView(TemplateView):
 class AuthorizedView(LoginRequiredMixin,TemplateView):
     template_name = "home/authorized.html"
     login_url = '/admin'
-
-# def home(request):
-#     return render(request, "home/welcome.html",{'today': datetime.today()})
-
-# @login_required(login_url='/admin')
-# def authorized(request):
-#     return render(request,"home/authorized.html",{})
